@@ -1,18 +1,6 @@
-// Utility hook to detect mobile view
-function useIsMobile(breakpoint = 640) {
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    function check() {
-      setIsMobile(window.innerWidth <= breakpoint);
-    }
-    check();
-    window.addEventListener('resize', check);
-    return () => window.removeEventListener('resize', check);
-  }, [breakpoint]);
-  return isMobile;
-}
 "use client";
 import { motion } from "framer-motion";
+import type { MouseEvent } from "react";
 import { useEffect, useRef, useState } from "react";
 
 type Particle = {
@@ -29,6 +17,20 @@ const images = [
   'https://picsum.photos/seed/d/1080/1080',
   'https://picsum.photos/seed/e/1080/1080',
 ];
+
+// Utility hook to detect mobile view
+function useIsMobile(breakpoint = 640) {
+  const [isMobile, setIsMobile] = useState(false);
+  useEffect(() => {
+    function check() {
+      setIsMobile(window.innerWidth <= breakpoint);
+    }
+    check();
+    window.addEventListener('resize', check);
+    return () => window.removeEventListener('resize', check);
+  }, [breakpoint]);
+  return isMobile;
+}
 
 export default function HeroSection() {
   const [particles, setParticles] = useState<Particle[]>([]);
@@ -66,9 +68,8 @@ export default function HeroSection() {
       setParticles((s) => s.filter((t) => t.id !== id));
     }, 900);
   }
-                      boxShadow: '0 18px 32px -8px rgba(0,0,0,0.45), 0 8px 24px -8px rgba(74,144,226,0.12)'
   // throttle spawns using rAF
-  function handleMove(e: React.MouseEvent) {
+  function handleMove(e: MouseEvent) {
     const now = performance.now();
     const throttle = 60; // ms between spawns
     if (now - lastRef.current < throttle) return;
