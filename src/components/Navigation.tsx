@@ -156,8 +156,7 @@ export default function Navigation() {
           padding: '24px 32px',
           display: 'flex',
           alignItems: 'center',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease'
+          cursor: 'pointer'
         }}
         onMouseEnter={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.1)'; }}
         onMouseLeave={(e) => { e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.05)'; }}
